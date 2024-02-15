@@ -3,7 +3,7 @@ import cheerio from "cheerio";
 import { CategoriesListType } from "$/src/rest/categories/types.ts";
 import { CategoryType } from "$/src/rest/categories/types.ts";
 
-export async function getCategoriesList() {
+export async function getCategoriesList(): Promise<CategoriesListType> {
 	const { data } = await http.get("");
 	const $ = cheerio.load(data);
 
