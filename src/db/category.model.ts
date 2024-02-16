@@ -26,32 +26,23 @@ export class Category {
 		}
 	}
 
-	// public static getAll(): CategoriesListType {
-	// 	const selectQuery = `SELECT name, url FROM ${this.tableName}`;
+	public static getAllImages(category: string) {
+		const selectQuery = `SELECT * FROM "${category}"`;
 
-	// 	const result: Array<string[]> = this.db.query(selectQuery);
+		const result: Array<string[]> = this.db.query(selectQuery);
 
-	// 	const categories: CategoryType[] = result.map(([name, url]) => ({
-	// 		name,
-	// 		url,
-	// 	}));
+		const imagesList = result.reduce(
+			(result, value) => {
+				result.push({
+					name: value[1],
+					url: value[2],
+				});
 
-	// 	return categories;
-	// }
+				return result;
+			},
+			[] as Array<{ name: string; url: string }>,
+		);
 
-	// public static getTotalPage(category: string): number {
-	// 	const selectQuery =
-	// 		`SELECT totalPage FROM ${this.tableName} WHERE url = ?`;
-
-	// 	const totalPage = this.db.query(selectQuery, [category])[0][0];
-
-	// 	return Number(totalPage);
-	// }
-
-	// public static updateTotalPage(category: string, totalPage: number) {
-	// 	const updateQuery =
-	// 		`UPDATE ${this.tableName} SET totalPage = ? WHERE url = ?`;
-
-	// 	this.db.query(updateQuery, [totalPage, category]);
-	// }
+		return imagesList;
+	}
 }

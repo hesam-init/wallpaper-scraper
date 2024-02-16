@@ -8,11 +8,12 @@
     "spinner": "npm:ora",
     "knex": "npm:knex",
     "sqlite": "https://raw.githubusercontent.com/dyedgreen/deno-sqlite/master/mod.ts",
-    "denodb": "https://deno.land/x/denodb/mod.ts"
+    "fs": "https://raw.githubusercontent.com/denoland/deno_std/main/fs/mod.ts"
   },
 
   "tasks": {
     "scrape": "deno run -A src/main.ts",
+    "download": "deno run -A src/download.ts",
     "cache": "deno run -A src/cache.ts"
   },
 

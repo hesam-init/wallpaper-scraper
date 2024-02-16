@@ -35,6 +35,32 @@ export class Categories {
 		return categories;
 	}
 
+	public static getAllTables(): Array<{ name: string; value: string }> {
+		const selectQuery = `
+		SELECT name FROM sqlite_schema 
+		WHERE type IN ('table','view') 
+		AND name NOT LIKE 'sqlite_%'
+		`;
+
+		const result: Array<string[]> = this.db.query(selectQuery);
+
+		const tables = result.reduce(
+			(result, value) => {
+				if (value[0] !== "categories") {
+					result.push({
+						name: value[0].split("_")[1],
+						value: value[0],
+					});
+				}
+
+				return result;
+			},
+			[] as Array<{ name: string; value: string }>,
+		);
+
+		return tables;
+	}
+
 	public static getTotalPage(category: string): number {
 		const selectQuery =
 			`SELECT totalPage FROM ${this.tableName} WHERE url = ?`;
