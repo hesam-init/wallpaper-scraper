@@ -6,33 +6,33 @@ import {
 
 export class Category {
 	private static tableName = "categories";
+	private static dbManager = DatabaseManager.getInstance();
+	private static db = Category.dbManager.getDb();
 
 	public static init() {
-		const dbManager = DatabaseManager.getInstance();
-		const db = dbManager.getDb();
-
-		db.execute(
-			`CREATE TABLE IF NOT EXISTS ${this.tableName} ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, url TEXT )`,
+		Category.db.execute(
+			`CREATE TABLE IF NOT EXISTS ${this.tableName} ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, url TEXT, totalPage INTEGER )`,
 		);
 	}
 
 	public static insert(name: string, url: string) {
-		const dbManager = DatabaseManager.getInstance();
-		const db = dbManager.getDb();
-
 		const insertQuery =
 			`INSERT INTO ${this.tableName} (name, url) VALUES (?, ?)`;
 
-		db.query(insertQuery, [name, url]);
+		this.db.query(insertQuery, [name, url]);
+	}
+
+	public static insertTotalPage(category: string, totalPage: number) {
+		const insertQuery =
+			`INSERT INTO ${this.tableName} (name, totalPage) VALUES (?, ?)`;
+
+		this.db.query(insertQuery, [category, totalPage]);
 	}
 
 	public static getAll(): CategoriesListType {
-		const dbManager = DatabaseManager.getInstance();
-		const db = dbManager.getDb();
-
 		const selectQuery = `SELECT name, url FROM ${this.tableName}`;
 
-		const result: Array<string[]> = db.query(selectQuery);
+		const result: Array<string[]> = this.db.query(selectQuery);
 
 		const categories: CategoryType[] = result.map(([name, url]) => ({
 			name,
