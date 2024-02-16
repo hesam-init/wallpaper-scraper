@@ -6,10 +6,10 @@ import { withLoader } from "$/src/helper/ora.ts";
 import Category from "$/src/db/category.model.ts";
 
 export async function getCategoriesList(): Promise<CategoriesListType> {
-	const categoriesList = Category.getAll();
+	const cachedCategoriesList = Category.getAll();
 
-	if (categoriesList.length > 0) {
-		return categoriesList;
+	if (cachedCategoriesList.length > 0) {
+		return cachedCategoriesList;
 	}
 
 	const data = await withLoader({
@@ -24,7 +24,7 @@ export async function getCategoriesList(): Promise<CategoriesListType> {
 
 	const categoriesItems = $(".section-dropdown a");
 
-	const categories: CategoriesListType = [];
+	const categoriesList: CategoriesListType = [];
 
 	categoriesItems.each((idx, el) => {
 		const category: CategoryType = {
@@ -32,12 +32,12 @@ export async function getCategoriesList(): Promise<CategoriesListType> {
 			url: $(el).attr("href") || "",
 		};
 
-		categories.push(category);
+		categoriesList.push(category);
 	});
 
-	categories.map((category) => {
+	categoriesList.map((category) => {
 		Category.insert(category.name, category.url);
 	});
 
-	return categories;
+	return categoriesList;
 }
