@@ -11,12 +11,20 @@ export class Category {
 		);
 	}
 
-	// public static insert(name: string, url: string) {
-	// 	const insertQuery =
-	// 		`INSERT INTO ${this.tableName} (name, url) VALUES (?, ?)`;
+	public static insert(category: string, title: string, url: string) {
+		const existingRow = this.db.query(
+			`SELECT * FROM "${this.tableName}_${category}" WHERE url = ?`,
+			[url],
+		);
 
-	// 	this.db.query(insertQuery, [name, url]);
-	// }
+		if (existingRow.length === 0) {
+			const insertQuery =
+				`INSERT INTO "${this.tableName}_${category}" (title, url) VALUES (?, ?)`;
+			this.db.query(insertQuery, [title, url]);
+		} else {
+			console.log(`${title} exist in ${category}`);
+		}
+	}
 
 	// public static getAll(): CategoriesListType {
 	// 	const selectQuery = `SELECT name, url FROM ${this.tableName}`;

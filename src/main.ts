@@ -13,3 +13,13 @@ async function main() {
 
 	await getWallpapers(selectedCategory, selectedTotalPage);
 }
+
+Deno.addSignalListener("SIGINT", sigIntHandler);
+
+function sigIntHandler() {
+	setTimeout(() => {
+		console.clear();
+		console.log("Process Closed !");
+		Deno.exit();
+	}, 500);
+}
