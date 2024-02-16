@@ -8,4 +8,4 @@ async function main() {
 	console.log(`${totalCategoryPage} pages`);
 }
 
-main();
+// main();

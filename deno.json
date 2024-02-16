@@ -5,7 +5,10 @@
     "cheerio": "npm:cheerio",
     "inquirer": "npm:inquirer",
     "progress": "npm:cli-progress",
-    "spinner": "npm:ora"
+    "spinner": "npm:ora",
+    "knex": "npm:knex",
+    "sqlite": "https://raw.githubusercontent.com/dyedgreen/deno-sqlite/master/mod.ts",
+    "denodb": "https://deno.land/x/denodb/mod.ts"
   },
 
   "tasks": {
