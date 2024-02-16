@@ -13,8 +13,8 @@ export async function getCategoriesList(): Promise<CategoriesListType> {
 	}
 
 	const data = await withLoader({
-		start: "fetching categories list",
-		success: "categories fetched",
+		start: "Fetching categories list",
+		success: "Categories fetched",
 	}, async () => {
 		const { data } = await http.get("");
 		return data;

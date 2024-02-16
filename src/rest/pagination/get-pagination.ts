@@ -13,8 +13,8 @@ export async function getCategoriesPagination(
 	}
 
 	const data = await withLoader({
-		start: "fetching totalpages",
-		success: "total pages fetched",
+		start: "Fetching totalpages",
+		success: "Total pages fetched",
 	}, async () => {
 		const { data } = await http.get(category);
 		return data;
