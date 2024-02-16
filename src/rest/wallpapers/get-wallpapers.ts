@@ -3,18 +3,11 @@ import cheerio from "cheerio";
 import { CategoriesListType } from "$/src/rest/categories/types.ts";
 import { CategoryType } from "$/src/rest/categories/types.ts";
 import { withLoader } from "$/src/helper/ora.ts";
-import { Categories } from "$/src/db/category.model.ts";
 
-export async function getCategoriesList(): Promise<CategoriesListType> {
-	const cachedCategoriesList = Categories.getAll();
-
-	if (cachedCategoriesList.length > 0) {
-		return cachedCategoriesList;
-	}
-
+export async function getWallpapers(): Promise<any> {
 	const data = await withLoader({
-		start: "fetching categories list",
-		success: "categories fetched",
+		start: "fetch wallpapers url",
+		success: "wallpapers",
 	}, async () => {
 		const { data } = await http.get("");
 		return data;
@@ -33,10 +26,6 @@ export async function getCategoriesList(): Promise<CategoriesListType> {
 		};
 
 		categoriesList.push(category);
-	});
-
-	categoriesList.map((category) => {
-		Categories.insert(category.name, category.url);
 	});
 
 	return categoriesList;

@@ -4,13 +4,13 @@ import {
 	CategoryType,
 } from "$/src/rest/categories/types.ts";
 
-export class Category {
+export class Categories {
 	private static tableName = "categories";
 	private static dbManager = DatabaseManager.getInstance();
-	private static db = Category.dbManager.getDb();
+	private static db = Categories.dbManager.getDb();
 
 	public static init() {
-		Category.db.execute(
+		Categories.db.execute(
 			`CREATE TABLE IF NOT EXISTS ${this.tableName} ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, url TEXT, totalPage INTEGER )`,
 		);
 	}
@@ -51,5 +51,3 @@ export class Category {
 		this.db.query(updateQuery, [totalPage, category]);
 	}
 }
-
-export default Category;

@@ -1,7 +1,7 @@
-import Category from "$/src/db/category.model.ts";
+import { Categories } from "$/src/db/category.model.ts";
 
 function initDb() {
-	const Models = [Category];
+	const Models = [Categories];
 
 	Models.forEach((Model) => {
 		Model.init();
