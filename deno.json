@@ -12,7 +12,7 @@
   },
 
   "tasks": {
-    "dev": "deno run -A src/main.ts",
+    "scrape": "deno run -A src/main.ts",
     "cache": "deno run -A src/cache.ts"
   },
 
