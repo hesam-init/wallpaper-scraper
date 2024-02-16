@@ -3,7 +3,9 @@
     "$/": "./",
     "axios": "npm:axios",
     "cheerio": "npm:cheerio",
-    "inquirer": "npm:inquirer"
+    "inquirer": "npm:inquirer",
+    "progress": "npm:cli-progress",
+    "spinner": "npm:ora"
   },
 
   "tasks": {

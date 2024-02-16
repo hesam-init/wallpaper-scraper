@@ -3,7 +3,7 @@ import { ENV } from "$/src/constants/env.ts";
 
 const http: AxiosInstance = axios.create({
 	baseURL: ENV.BASE_URL,
-	timeout: 5000,
+	timeout: 8000,
 });
 
 http.interceptors.request.use(
