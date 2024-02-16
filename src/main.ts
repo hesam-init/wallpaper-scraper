@@ -1,6 +1,6 @@
 import { selectCategory } from "$/src/rest/categories/select-category.ts";
-import { getCategoriesPagination } from "$/src/rest/pagination/get-pagination.ts";
 import initDb from "$/src/db/init.ts";
+import { selectTotalPage } from "$/src/rest/pagination/select-page.ts";
 
 initDb();
 
@@ -8,7 +8,7 @@ main();
 
 async function main() {
 	const selectedCategory = await selectCategory();
-	const totalCategoryPage = await getCategoriesPagination(selectedCategory);
+	const selecttedTotalPage = await selectTotalPage(selectedCategory);
 
-	console.log(`${totalCategoryPage} pages`);
+	console.log(selecttedTotalPage);
 }
