@@ -1,7 +1,7 @@
 import http from "$/src/helper/axios.ts";
 import cheerio from "cheerio";
 import { withLoader } from "$/src/helper/ora.ts";
-import { Categories } from "$/src/db/category.model.ts";
+import { Categories } from "$/src/db/categories.model.ts";
 
 export async function getCategoriesPagination(
 	category: string,

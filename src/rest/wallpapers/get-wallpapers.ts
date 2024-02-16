@@ -1,32 +1,38 @@
 import http from "$/src/helper/axios.ts";
 import cheerio from "cheerio";
-import { CategoriesListType } from "$/src/rest/categories/types.ts";
-import { CategoryType } from "$/src/rest/categories/types.ts";
 import { withLoader } from "$/src/helper/ora.ts";
+import { Category } from "$/src/db/category.model.ts";
 
-export async function getWallpapers(): Promise<any> {
+export async function getWallpapers(
+	category: string,
+	totalPage: number,
+): Promise<any> {
+	const selectedCategory = category.replaceAll("/", "");
+
+	Category.init(selectedCategory);
+
 	const data = await withLoader({
 		start: "fetch wallpapers url",
 		success: "wallpapers",
 	}, async () => {
-		const { data } = await http.get("");
+		const { data } = await http.get(category, {
+			params: {
+				page: 2,
+			},
+		});
 		return data;
 	});
 
 	const $ = cheerio.load(data);
 
-	const categoriesItems = $(".section-dropdown a");
+	const picsList = $("#pics-list p");
 
-	const categoriesList: CategoriesListType = [];
-
-	categoriesItems.each((idx, el) => {
-		const category: CategoryType = {
-			name: $(el).attr("title") || "",
-			url: $(el).attr("href") || "",
+	picsList.each((idx, el) => {
+		const pic = {
+			title: $(el).find("a").attr("title"),
+			url: $(el).find("a").attr("href"),
 		};
 
-		categoriesList.push(category);
+		console.log(pic);
 	});
-
-	return categoriesList;
 }

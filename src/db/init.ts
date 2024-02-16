@@ -1,4 +1,4 @@
-import { Categories } from "$/src/db/category.model.ts";
+import { Categories } from "$/src/db/categories.model.ts";
 
 function initDb() {
 	const Models = [Categories];

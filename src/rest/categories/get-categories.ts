@@ -3,7 +3,7 @@ import cheerio from "cheerio";
 import { CategoriesListType } from "$/src/rest/categories/types.ts";
 import { CategoryType } from "$/src/rest/categories/types.ts";
 import { withLoader } from "$/src/helper/ora.ts";
-import { Categories } from "$/src/db/category.model.ts";
+import { Categories } from "$/src/db/categories.model.ts";
 
 export async function getCategoriesList(): Promise<CategoriesListType> {
 	const cachedCategoriesList = Categories.getAll();
