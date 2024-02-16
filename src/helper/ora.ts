@@ -18,6 +18,7 @@ export async function withLoader<T>(
 		return result;
 	} catch (error) {
 		spinner.fail(messages.failed);
-		throw error;
+
+		Deno.exit();
 	}
 }

@@ -22,12 +22,15 @@ export async function getWallpapers(
 	const data = await withLoader({
 		start:
 			`fetching ${selectedCategory} wallpapers url - page ${currentPage}`,
+		success: `page ${currentPage} - done !`,
+		failed: `failed to fetch data !`,
 	}, async () => {
 		const { data } = await http.get(category, {
 			params: {
 				page: currentPage,
 			},
 		});
+
 		return data;
 	});
 

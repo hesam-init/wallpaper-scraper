@@ -10,8 +10,16 @@ export async function selectTotalPage(category: string): Promise<number> {
 			name: "page",
 			message:
 				`${totalPage} Total page, How much page do you want to scrape ?`,
-			validate(value: number) {
-				if (value <= totalPage) {
+			validate(value: string) {
+				const numericValue = Number(value);
+
+				if (value.trim() === "") {
+					return "Please enter a valid number";
+				}
+
+				if (
+					numericValue <= totalPage
+				) {
 					return true;
 				}
 
