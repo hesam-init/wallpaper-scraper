@@ -44,21 +44,25 @@ export class Categories {
 
 		const result: Array<string[]> = this.db.query(selectQuery);
 
-		const tables = result.reduce(
-			(result, value) => {
-				if (value[0] !== "categories") {
-					result.push({
-						name: value[0].split("_")[1],
-						value: value[0],
-					});
-				}
+		if (result.length > 0) {
+			const tables = result.reduce(
+				(result, value) => {
+					if (value[0] !== "categories") {
+						result.push({
+							name: value[0].split("_")[1],
+							value: value[0],
+						});
+					}
 
-				return result;
-			},
-			[] as Array<{ name: string; value: string }>,
-		);
+					return result;
+				},
+				[] as Array<{ name: string; value: string }>,
+			);
 
-		return tables;
+			return tables;
+		} else {
+			throw new Deno.errors.NotFound("Database is empty !");
+		}
 	}
 
 	public static getTotalPage(category: string): number {

@@ -2,6 +2,7 @@ import initDb from "$/src/db/init.ts";
 import { selectCategory } from "$/src/rest/categories/select-category.ts";
 import { selectTotalPage } from "$/src/rest/pagination/select-page.ts";
 import { getWallpapers } from "$/src/rest/wallpapers/get-wallpapers.ts";
+import { MESSAGE } from "$/src/constants/env.ts";
 
 Main();
 
@@ -16,7 +17,8 @@ async function Main() {
 
 Deno.addSignalListener("SIGINT", () => {
 	setTimeout(() => {
-		console.log("\n Process Closed !");
-		Deno.exit();
+		console.clear();
+		console.log(`\n${MESSAGE.EXIT}`);
+		Deno.exit(0);
 	}, 500);
 });

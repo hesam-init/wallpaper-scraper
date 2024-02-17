@@ -67,8 +67,6 @@ export async function downloadFile(url: string, dest?: string) {
 
 		file.close();
 	} catch (error) {
-		throw new Deno.errors.BadResource(
-			error,
-		);
+		Deno.exit(5);
 	}
 }
