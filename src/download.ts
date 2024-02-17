@@ -15,8 +15,7 @@ async function downloadWallpapers() {
 
 Deno.addSignalListener("SIGINT", () => {
 	setTimeout(() => {
-		console.clear();
-		console.log("Process Closed !");
+		console.log("\n Process Closed !");
 		Deno.exit();
 	}, 500);
 });
