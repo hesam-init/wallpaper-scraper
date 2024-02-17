@@ -4,9 +4,9 @@ import { selectTotalPage } from "$/src/rest/pagination/select-page.ts";
 import { getWallpapers } from "$/src/rest/wallpapers/get-wallpapers.ts";
 import { MESSAGE } from "$/src/constants/env.ts";
 
-Main();
+main();
 
-async function Main() {
+async function main() {
 	initDb();
 
 	const selectedCategory = await selectCategory();
